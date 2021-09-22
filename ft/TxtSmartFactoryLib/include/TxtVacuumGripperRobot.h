@@ -221,7 +221,7 @@ public:
 		reqWP_order = ft::TxtWorkpiece("", type, WP_STATE_RAW);
 		reqOrder= true;
 	}
-    void customFlowOne(TxtWPType_t type) {
+    void customFlowOneTrigger(TxtWPType_t type) {
         customFlowOne = true;
     }
 	void requestNfcRead() {
