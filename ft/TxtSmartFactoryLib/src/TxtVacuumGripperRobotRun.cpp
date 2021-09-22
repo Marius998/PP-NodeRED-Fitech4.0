@@ -192,7 +192,24 @@ void TxtVacuumGripperRobot::fsmStep()
         else if (customFlowOne)
         {
             moveFromHBW1();
-            FSM_TRANSITION( VGR_WAIT_FETCHED, color=green, label='fetched' );
+            if (reqHBWfetched)
+            {
+                moveFromHBW2();
+
+                reqWP_MPO = reqWP_HBW;
+
+                assert(mqttclient);
+                mqttclient->publishVGR_Do(VGR_HBW_STORECONTAINER, reqWP_MPO, TIMEOUT_MS_PUBLISH);
+
+                assert(reqWP_MPO);
+                proStorage.setTimestampNow(reqWP_MPO->tag_uid, OUTSOURCING_INDEX);
+
+                reqHBWfetched = false;
+                setTarget("mpo");
+                moveMPO();
+                moveRef();
+            }
+            moveFromHBW2();
             customFlowOne = false;
         }
 		else if (!dps.is_DIN())
