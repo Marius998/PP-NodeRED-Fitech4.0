@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/Marius998/PP-NodeRED-Fitech4.0/issues"
   },
-  "homepage": "https://github.com/Marius998/PP-NodeRED-Fitech4.0#readme"
+  "homepage": "https://github.com/Marius998/PP-NodeRED-Fitech4.0#readme",
+  "dependencies": {}
 }
