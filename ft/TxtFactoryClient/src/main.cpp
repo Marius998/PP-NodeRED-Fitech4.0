@@ -324,7 +324,7 @@ class callback : public virtual mqtt::callback
 		}
 		else if (msg->get_topic() == CUSTOM_OUTPUT_ORDER){
 
-			vgr_.requestOrder(ft::WP_TYPE_WHITE);
+			vgr_.customFlowOne(ft::WP_TYPE_WHITE);
 		}
 		 else if (msg->get_topic() == TOPIC_OUTPUT_ORDER) {
 			SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "DETECTED order:{}", msg->get_topic());

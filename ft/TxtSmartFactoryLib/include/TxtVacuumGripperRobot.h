@@ -221,6 +221,9 @@ public:
 		reqWP_order = ft::TxtWorkpiece("", type, WP_STATE_RAW);
 		reqOrder= true;
 	}
+    void customFlowOne(TxtWPType_t type) {
+        customFlowOne = true;
+    }
 	void requestNfcRead() {
 		SPDLOG_LOGGER_TRACE(spdlog::get("console"),"requestNfcRead",0);
 		reqNfcRead= true;
@@ -354,6 +357,7 @@ protected:
 	/* remote */
 	bool reqQuit;
 	bool reqOrder;
+	bool customFlowOne;
 	TxtWorkpiece reqWP_order;
 	bool reqNfcRead;
 	bool reqNfcDelete;

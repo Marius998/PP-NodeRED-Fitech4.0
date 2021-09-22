@@ -189,6 +189,12 @@ void TxtVacuumGripperRobot::fsmStep()
 			FSM_TRANSITION( FETCH_WP_VGR, color=blue, label='req order' );
 			reqOrder = false;
 		}
+        else if (customFlowOne)
+        {
+            moveFromHBW1();
+            FSM_TRANSITION( VGR_WAIT_FETCHED, color=green, label='fetched' );
+            customFlowOne = false;
+        }
 		else if (!dps.is_DIN())
 		{
 			FSM_TRANSITION( START_DELIVERY, color=blue, label='dsi' );
