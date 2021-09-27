@@ -139,7 +139,7 @@ namespace ft {
                     }
                 }
 
-                if (reqSLDsorted) {
+                if (reqSLDsorted && !customFlowOne) {
                     setTarget("dso");
                     reqWP_SLD.printDebug();
                     if (reqWP_SLD.type == WP_TYPE_WHITE) {
@@ -164,7 +164,11 @@ namespace ft {
 
                     FSM_TRANSITION(FETCH_WP_VGR, color = blue, label = 'req order');
                     reqOrder = false;
-                } else if (customFlowOne) {
+                } else if (!dps.is_DIN()) {
+                    FSM_TRANSITION(START_DELIVERY, color = blue, label = 'dsi');
+                }
+                    // Custom Workflow, Marius Hammer
+                else if (customFlowOne) {
                     if (reqHBWfetched) {
                         moveFromHBW1();
 
@@ -204,12 +208,45 @@ namespace ft {
                             break;
                         }
                         if (reqWP_SLD.type != WP_TYPE_NONE) {
+                            grip();
+                            moveRef();
+
+                            setTarget("hbw");
+                            moveNFC();
+                            std::string uid = dps.nfcReadUID();
+                            if (uid.empty()) {
+                                FSM_TRANSITION(WRONG_COLOR, color = red, label = 'empty tag');
+                                break;
+                            } else {
+                                proStorage.resetTagUidMaskTs(uid);
+                                proStorage.setTimestampNow(uid, DELIVERY_RAW_INDEX);
+                                if (reqWP_HBW != 0) {
+                                    reqWP_HBW->printDebug();
+                                    delete reqWP_HBW;
+                                }
+                                reqWP_HBW = new TxtWorkpiece(uid, WP_TYPE_NONE, WP_STATE_PROCESSED);
+                                reqWP_HBW->printDebug();
+                                printState(COLOR_DETECTION);
+                                moveColorSensor();
+                                dps.readColorValue();
+                                assert(reqWP_HBW);
+                                reqWP_HBW->printDebug();
+                                proStorage.setTimestampNow(reqWP_HBW->tag_uid, INSPECTION_INDEX);
+                                if ((dps.getLastColor() != WP_TYPE_NONE) /*&&
+			(hbw->canColorBeStored(dps.getLastColor()))*/) {
+                                    reqWP_HBW->type = dps.getLastColor();
+                                    reqWP_HBW->printDebug();
+                                    FSM_TRANSITION(STORE_WP_VGR, color = blue, label = 'nfc write ok');
+                                } else {
+                                    FSM_TRANSITION(NFC_REJECTED, color = blue, label = 'color wrong');
+                                    break;
+                                }
+
+                            }
+                            reqSLDsorted = false;
+                            customFlowOne = false;
                         }
-                        reqSLDsorted = false;
-                        customFlowOne = false;
                     }
-                } else if (!dps.is_DIN()) {
-                    FSM_TRANSITION(START_DELIVERY, color = blue, label = 'dsi');
                 }
                     /*else if (joyData.aY2 < -500)
                     {
@@ -253,6 +290,7 @@ namespace ft {
                         } else if (uid == dps.getUIDCalibMode()) {
                             FSM_TRANSITION(CALIB_VGR, color = orange, label = 'cmd calib');
                         }
+
                         /*else if (uid == dps.getUIDOrderWHITE())*/
                         /*else if (uid == dps.getUIDOrderRED())*/
                         /*else if (uid == dps.getUIDOrderBLUE())*/
