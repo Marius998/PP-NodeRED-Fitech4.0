@@ -229,13 +229,13 @@ namespace ft {
                                 printState(COLOR_DETECTION);
                                 moveColorSensor();
                                 dps.readColorValue();
-                                assert(reqWP_HBW);
                                 reqWP_HBW->printDebug();
                                 proStorage.setTimestampNow(reqWP_HBW->tag_uid, INSPECTION_INDEX);
                                 if ((dps.getLastColor() != WP_TYPE_NONE) /*&&
 			(hbw->canColorBeStored(dps.getLastColor()))*/) {
                                     reqWP_HBW->type = dps.getLastColor();
                                     reqWP_HBW->printDebug();
+                                    assert(reqWP_HBW);
                                     FSM_TRANSITION(STORE_WP_VGR, color = blue, label = 'nfc write ok');
                                 } else {
                                     FSM_TRANSITION(NFC_REJECTED, color = blue, label = 'color wrong');
