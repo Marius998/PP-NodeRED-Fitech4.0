@@ -233,7 +233,7 @@ bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t,TxtWPState_t s = WP_STATE_R
 				p.x = i; p.y = j;
 				if (wp[i][j] == NULL)
 					continue;
-				if (wp[i][j]->type == t)
+				if (wp[i][j]->type == t && wp[i][j]->state == s)
 				{
 					SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "t {} -> nextFetchPos {} {}",t, p.x, p.y);
 					nextFetchPos = p;
