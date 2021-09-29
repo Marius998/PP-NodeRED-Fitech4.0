@@ -42,7 +42,7 @@ public:
 
 	bool store(TxtWorkpiece _wp);
 	bool storeContainer();
-	bool fetch(TxtWPType_t t);
+	bool fetch(TxtWPType_t t, TxtWPState_t s);
 	bool fetchContainer();
 
 	StoragePos2 getNextStorePos() { return nextFetchPos; } //nextStorePos; }

@@ -190,7 +190,7 @@ void TxtHighBayWarehouse::fsmStep()
 	case FETCH_WP:
 	{
 		printState(FETCH_WP);
-		if (reqVGRwp && fetch(reqVGRwp->type))
+		if (reqVGRwp && fetch(reqVGRwp->type,reqVGRwp->state))
 		{
 			assert(mqttclient);
 			mqttclient->publishHBW_Ack(HBW_FETCHED, reqVGRwp, TIMEOUT_MS_PUBLISH);

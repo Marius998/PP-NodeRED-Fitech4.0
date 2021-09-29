@@ -213,7 +213,7 @@ bool TxtHighBayWarehouseStorage::store(TxtWorkpiece _wp)
 	return false;
 }
 
-bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t)
+bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t,TxtWPState_t s = WP_STATE_RAW)
 {
 	SPDLOG_LOGGER_TRACE(spdlog::get("console"), "fetch {}",t);
 	nextFetchPos.x = -1; //set invalid pos

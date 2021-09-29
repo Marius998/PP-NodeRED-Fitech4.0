@@ -197,7 +197,7 @@ public:
 
 	bool store(TxtWorkpiece wp);
 	bool storeContainer();
-	bool fetch(TxtWPType_t t);
+	bool fetch(TxtWPType_t t,TxtWPState_t s);
 	bool fetchContainer();
 
 	bool canColorBeStored(TxtWPType_t c);
