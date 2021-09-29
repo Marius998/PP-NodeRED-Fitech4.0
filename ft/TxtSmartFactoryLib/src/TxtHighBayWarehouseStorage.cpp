@@ -222,7 +222,7 @@ bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t,TxtWPState_t s = WP_STATE_R
 	{
 		SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "STORAGE_EMPTY -> return false",0);
 		return false;
-	} else
+	} else if(s = WP_STATE_RAW)
 	{
 		bool found = false;
 		for(int i=0;i<3 && !found;i++)
@@ -242,6 +242,26 @@ bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t,TxtWPState_t s = WP_STATE_R
 			}
 		}
 	}
+    else if(s = WP_STATE_PROCESSED)
+    {
+        bool found = false;
+        for(int i=0;i<3 && !found;i++)
+        {
+            for(int j=2;j>=0&& !found;j--)
+            {
+                StoragePos2 p;
+                p.x = i; p.y = j;
+                if (wp[i][j] == NULL)
+                    continue;
+                if (wp[i][j]->type == t && wp[i][j]->state == s)
+                {
+                    SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "t {} -> nextFetchPos {} {}",t, p.x, p.y);
+                    nextFetchPos = p;
+                    found = true;
+                }
+            }
+        }
+    }
 	if (isValidPos(nextFetchPos))
 	{
 		SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "OK -> nextFetchPos type {} ",t);
