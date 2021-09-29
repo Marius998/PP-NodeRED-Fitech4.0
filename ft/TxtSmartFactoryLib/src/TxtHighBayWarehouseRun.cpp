@@ -121,7 +121,12 @@ void TxtHighBayWarehouse::fsmStep()
 		}
 		else if (reqVGRfetch)
 		{
-			FSM_TRANSITION( FETCH_WP, color=blue, label='req fetch\nworkpiece' );
+            if(reqVGRwp->state == WP_STATE_PROCESSED){
+
+            } else {
+                FSM_TRANSITION( FETCH_WP, color=blue, label='req fetch\nworkpiece' );
+            }
+
 			reqVGRfetch = false;
 		}
 		else if (reqVGRcalib)
