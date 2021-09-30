@@ -167,8 +167,19 @@ namespace ft {
                 } else if (!dps.is_DIN()) {
                     FSM_TRANSITION(START_DELIVERY, color = blue, label = 'dsi');
                 } else if (moveA_B) {
-                    moveFromHBW1();
-                    if(mv_a == "test"){
+
+                    // Decide where to pick up workpiece
+                    if(mv_a == "hbw"){
+                        moveFromHBW1();
+                        moveFromHBW2();
+                        grip();
+                        moveRef();
+                    }
+                    else if(mv_a == "mpo"){
+                        moveRef();
+                    }
+                    else if(mv_a == "sld"){
+                        // Decide what color to pick up
                         moveRef();
                     }
                     moveA_B = false;

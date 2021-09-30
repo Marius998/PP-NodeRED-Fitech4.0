@@ -329,8 +329,6 @@ class callback : public virtual mqtt::callback
         else if (msg->get_topic() == CUSTOM_MOVE){
             std::string a="";
             std::string b="";
-            vgr_.moveA_BTrigger(a,b);
-
             std::stringstream ssin(msg->to_string());
 			Json::Value root;
             try {
@@ -350,7 +348,7 @@ class callback : public virtual mqtt::callback
 					} else if (stype == "BLUE")
 					{
 					}
-
+                    vgr_.moveA_BTrigger(a,b);
 				}
 			} catch (const Json::RuntimeError& exc) {
 				std::cout << "Error: " << exc.what() << std::endl;
