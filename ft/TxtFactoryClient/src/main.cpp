@@ -341,13 +341,6 @@ class callback : public virtual mqtt::callback
 				{
 					std::string stype = root["type"].asString();
 					SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "  type:{}", stype);
-					if (stype == "WHITE")
-					{
-					} else if(stype == "RED")
-					{
-					} else if (stype == "BLUE")
-					{
-					}
                     vgr_.moveA_BTrigger(a,b);
 				}
 			} catch (const Json::RuntimeError& exc) {

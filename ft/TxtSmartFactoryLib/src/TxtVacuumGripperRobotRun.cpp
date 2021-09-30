@@ -170,16 +170,46 @@ namespace ft {
 
                     // Decide where to pick up workpiece
                     if(mv_a == "hbw"){
+                        moveRef();
                         moveFromHBW1();
                         moveFromHBW2();
                         grip();
                         moveRef();
+                        reqWP_MPO = reqWP_HBW;
+                        assert(mqttclient);
+                        mqttclient->publishVGR_Do(VGR_HBW_STORECONTAINER, reqWP_MPO, TIMEOUT_MS_PUBLISH);
                     }
                     else if(mv_a == "mpo"){
                         moveRef();
+                        // MOVE_MPO COPY
+
+                        SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO",0);
+                        move("MPO0", ft::VGRMOV_PTP);
+                        move("MPO", ft::VGRMOV_PTP);
+                        grip();
+                        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                        axisY.moveRef();
+                        axisZ.moveRef();
                     }
-                    else if(mv_a == "sld"){
+                    else if(mv_a == "sld_white"){
                         // Decide what color to pick up
+                        moveRef();
+                        moveSSD1();
+                        grip();
+                        moveRef();
+                    }
+                    else if(mv_a == "sld_red"){
+                        // Decide what color to pick up
+                        moveRef();
+                        moveSSD2();
+                        grip();
+                        moveRef();
+                    }
+                    else if(mv_a == "sld_blue"){
+                        // Decide what color to pick up
+                        moveRef();
+                        moveSSD3();
+                        grip();
                         moveRef();
                     }
                     moveA_B = false;
