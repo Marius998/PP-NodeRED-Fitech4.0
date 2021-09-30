@@ -159,6 +159,7 @@ public:
 #define TOPIC_OUTPUT_STATE_ACK   "f/o/state/ack"
 #define TOPIC_OUTPUT_ORDER       "f/o/order"
 #define CUSTOM_OUTPUT_ORDER      "f/test/order"
+#define CUSTOM_MOVE              "f/move"
 #define TOPIC_OUTPUT_NFC_DS      "f/o/nfc/ds"
 
 //factory local

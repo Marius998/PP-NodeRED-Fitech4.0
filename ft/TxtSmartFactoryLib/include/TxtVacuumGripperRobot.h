@@ -224,6 +224,9 @@ public:
     void customFlowOneTrigger(TxtWPType_t type) {
         customFlowOne = true;
     }
+    void moveA_BTrigger(TxtWPType_t type) {
+        moveA_B = true;
+    }
 	void requestNfcRead() {
 		SPDLOG_LOGGER_TRACE(spdlog::get("console"),"requestNfcRead",0);
 		reqNfcRead= true;
@@ -358,6 +361,7 @@ protected:
 	bool reqQuit;
 	bool reqOrder;
 	bool customFlowOne;
+	bool moveA_B;
 	TxtWorkpiece reqWP_order;
 	bool reqNfcRead;
 	bool reqNfcDelete;
