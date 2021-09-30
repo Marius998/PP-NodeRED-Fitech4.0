@@ -166,6 +166,8 @@ namespace ft {
                     reqOrder = false;
                 } else if (!dps.is_DIN()) {
                     FSM_TRANSITION(START_DELIVERY, color = blue, label = 'dsi');
+                } else if (moveA_B) {
+                    moveFromHBW1();
                 }
                     // Custom Workflow, Marius Hammer
                 else if (customFlowOne) {

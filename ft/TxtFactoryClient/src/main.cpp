@@ -327,8 +327,34 @@ class callback : public virtual mqtt::callback
 			vgr_.customFlowOneTrigger(ft::WP_TYPE_WHITE);
 		}
         else if (msg->get_topic() == CUSTOM_MOVE){
+            std::string a="";
+            std::string b="";
 
-			vgr_.moveA_BTrigger(std::string a, std::string b);
+            std::stringstream ssin(msg->to_string());
+			Json::Value root;
+            try {
+				ssin >> root;
+				std::string sts = root["ts"].asString();
+				a = root["from"].asString();
+				b = root["to"].asString();
+				SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "  ts:{}", sts);
+				if (ft::trycheckTimestampTTL(sts))
+				{
+					std::string stype = root["type"].asString();
+					SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "  type:{}", stype);
+					if (stype == "WHITE")
+					{
+					} else if(stype == "RED")
+					{
+					} else if (stype == "BLUE")
+					{
+					}
+
+                    vgr_.moveA_BTrigger(a,b);
+				}
+			} catch (const Json::RuntimeError& exc) {
+				std::cout << "Error: " << exc.what() << std::endl;
+			}
 		}
 		 else if (msg->get_topic() == TOPIC_OUTPUT_ORDER) {
 			SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "DETECTED order:{}", msg->get_topic());

@@ -224,7 +224,9 @@ public:
     void customFlowOneTrigger(TxtWPType_t type) {
         customFlowOne = true;
     }
-    void moveA_BTrigger(TxtWPType_t type) {
+    void moveA_BTrigger(std::string a, std::string b) {
+        mv_a = a;
+        mv_b = b;
         moveA_B = true;
     }
 	void requestNfcRead() {
@@ -362,6 +364,7 @@ protected:
 	bool reqOrder;
 	bool customFlowOne;
 	bool moveA_B;
+    std::string mv_a,mv_b;
 	TxtWorkpiece reqWP_order;
 	bool reqNfcRead;
 	bool reqNfcDelete;
