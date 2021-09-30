@@ -168,6 +168,10 @@ namespace ft {
                     FSM_TRANSITION(START_DELIVERY, color = blue, label = 'dsi');
                 } else if (moveA_B) {
                     moveFromHBW1();
+                    if(mv_a == "test"){
+                        moveRef();
+                    }
+                    moveA_B = false;
                 }
                     // Custom Workflow, Marius Hammer
                 else if (customFlowOne) {

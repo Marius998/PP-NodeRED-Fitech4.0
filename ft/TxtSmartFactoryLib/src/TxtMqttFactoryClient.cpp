@@ -196,6 +196,7 @@ void TxtMqttFactoryClient::disconnect(long int timeout) {
 			unsubTopic(TOPIC_OUTPUT_STATE_ACK, timeout);
 			unsubTopic(TOPIC_OUTPUT_ORDER, timeout);
 			unsubTopic(CUSTOM_OUTPUT_ORDER, timeout);
+			unsubTopic(CUSTOM_MOVE, timeout);
 			unsubTopic(TOPIC_OUTPUT_NFC_DS, timeout);
 			//local
 			unsubTopic(TOPIC_LOCAL_SSC_JOY, timeout);
@@ -300,6 +301,7 @@ bool TxtMqttFactoryClient::start_consume(long int timeout) {
 			subTopic(TOPIC_OUTPUT_STATE_ACK, timeout);
 			subTopic(TOPIC_OUTPUT_ORDER, timeout);
 			subTopic(CUSTOM_OUTPUT_ORDER, timeout);
+			subTopic(CUSTOM_MOVE, timeout);
 			subTopic(TOPIC_OUTPUT_NFC_DS, timeout);
 			//local
 			subTopic(TOPIC_LOCAL_SSC_JOY, timeout);
