@@ -328,7 +328,7 @@ class callback : public virtual mqtt::callback
 		}
         else if (msg->get_topic() == CUSTOM_MOVE){
 
-			vgr_.moveA_BTrigger(ft::WP_TYPE_WHITE);
+			vgr_.moveA_BTrigger(std::string a, std::string b);
 		}
 		 else if (msg->get_topic() == TOPIC_OUTPUT_ORDER) {
 			SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "DETECTED order:{}", msg->get_topic());
