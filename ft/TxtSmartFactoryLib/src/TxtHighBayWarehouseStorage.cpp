@@ -222,7 +222,7 @@ bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t,TxtWPState_t s = WP_STATE_R
 	{
 		SPDLOG_LOGGER_DEBUG(spdlog::get("console"), "STORAGE_EMPTY -> return false",0);
 		return false;
-	} else if(s = WP_STATE_RAW)
+	} else if(s == WP_STATE_RAW)
 	{
 		bool found = false;
 		for(int i=0;i<3 && !found;i++)
@@ -242,7 +242,7 @@ bool TxtHighBayWarehouseStorage::fetch(TxtWPType_t t,TxtWPState_t s = WP_STATE_R
 			}
 		}
 	}
-    else if(s = WP_STATE_PROCESSED)
+    else if(s == WP_STATE_PROCESSED)
     {
         bool found = false;
         for(int i=0;i<3 && !found;i++)
