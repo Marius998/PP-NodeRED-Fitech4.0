@@ -1,4 +1,4 @@
-# PP-NodeRED-Fitech4.0
+# Commissioning FT-Factory 4.0
 
 ## Node-RED Setup 
 ### Installation 
@@ -15,3 +15,8 @@ Start `node-red`
 Import **PP-NodeRED-Fitech4.0/flows.js** 
 
 ## Factory Setup 
+### Checklist 
+1. Connected to Internet ( Sync Network Time Protoco )
+2. Manually set/sync time and date on all txt controllers
+3. wait for all controllers to be connected to the factorys router
+4. Start main txt ( the one with the camera ) first
