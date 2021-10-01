@@ -12,21 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: configure
-      working-directory: ./ft
-      run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin
-      
-    - name: configure2
-      run: export TOOLCHAIN_BIN_PATH=./gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin
-      
-    - name: configure3
-      run: ls
+    - uses: actions/checkout@v2   
       
     - name: Make Project
       working-directory: ./ft
-      run: make
+      run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin && make
       
     - name: Run check
       working-directory: ./t
