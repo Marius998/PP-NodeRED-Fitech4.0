@@ -18,10 +18,6 @@ jobs:
         working-directory: ./ft
         run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin && make
 
-      - name: Run check
-        working-directory: ./ft
-        run: make check
-
       - name: Show binaries
         working-directory: ./ft/bin
         run: ls
