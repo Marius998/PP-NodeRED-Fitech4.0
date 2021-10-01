@@ -167,115 +167,149 @@ namespace ft {
                 } else if (!dps.is_DIN()) {
                     FSM_TRANSITION(START_DELIVERY, color = blue, label = 'dsi');
                 } else if (moveA_B) {
+                    if (mv_a != "none") {
+                        // Decide where to pick up workpiece - From start
+                        if (mv_a == "hbw") {
+                            moveRef();
+                            moveFromHBW1();
+                            moveFromHBW2();
+                            grip();
+                            moveRef();
+                            reqWP_MPO = reqWP_HBW;
+                            assert(mqttclient);
+                            mqttclient->publishVGR_Do(VGR_HBW_STORECONTAINER, reqWP_MPO, TIMEOUT_MS_PUBLISH);
+                        } else if (mv_a == "mpo") {
+                            moveRef();
+                            // MOVE_MPO COPY
 
-                    // Decide where to pick up workpiece - From start
-                    if(mv_a == "hbw"){
-                        moveRef();
-                        moveFromHBW1();
-                        moveFromHBW2();
-                        grip();
-                        moveRef();
-                        reqWP_MPO = reqWP_HBW;
-                        assert(mqttclient);
-                        mqttclient->publishVGR_Do(VGR_HBW_STORECONTAINER, reqWP_MPO, TIMEOUT_MS_PUBLISH);
+                            SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO", 0);
+                            move("MPO0", ft::VGRMOV_PTP);
+                            move("MPO", ft::VGRMOV_PTP);
+                            grip();
+                            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                            axisY.moveRef();
+                            axisZ.moveRef();
+                        } else if (mv_a == "sld_white") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD1();
+                            grip();
+                            moveRef();
+                        } else if (mv_a == "sld_red") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD2();
+                            grip();
+                            moveRef();
+                        } else if (mv_a == "sld_blue") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD3();
+                            grip();
+                            moveRef();
+                        }
+                        // From end
+                        // To start
+                        if (mv_b == "hbw") {
+                            moveRef();
+                            moveFromHBW1();
+                            release();
+                            moveRef();
+                        } else if (mv_b == "mpo") {
+                            moveRef();
+                            // MOVE_MPO COPY
+                            SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO", 0);
+                            move("MPO0", ft::VGRMOV_PTP);
+                            move("MPO", ft::VGRMOV_PTP);
+                            release();
+                            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                            axisY.moveRef();
+                            axisZ.moveRef();
+                        } else if (mv_b == "sld_white") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD1();
+                            release();
+                            moveRef();
+                        } else if (mv_b == "sld_red") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD2();
+                            release();
+                            moveRef();
+                        } else if (mv_b == "sld_blue") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD3();
+                            release();
+                            moveRef();
+                        } else if (mv_b == "dsi") {
+                            // Decide what color to pick up
+                            moveRef();
+                            move("DIN0", ft::VGRMOV_PTP);
+                            move("DIN", ft::VGRMOV_PTP);
+                            release();
+                        } else if (mv_b == "dso") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveDeliveryOutAndRelease();
+                        } else if (mv_b == "nfc") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveNFC();
+                        } else if (mv_b == "color") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveColorSensor();
+                        }
                     }
-                    else if(mv_a == "mpo"){
-                        moveRef();
-                        // MOVE_MPO COPY
-
-                        SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO",0);
-                        move("MPO0", ft::VGRMOV_PTP);
-                        move("MPO", ft::VGRMOV_PTP);
-                        grip();
-                        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                        axisY.moveRef();
-                        axisZ.moveRef();
-                    }
-                    else if(mv_a == "sld_white"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveSSD1();
-                        grip();
-                        moveRef();
-                    }
-                    else if(mv_a == "sld_red"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveSSD2();
-                        grip();
-                        moveRef();
-                    }
-                    else if(mv_a == "sld_blue"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveSSD3();
-                        grip();
-                        moveRef();
-                    }
-                    // From end
-                    // To start
-                    if(mv_b == "hbw"){
-                        moveRef();
-                        moveFromHBW1();
-                        release();
-                        moveRef();
-                    }
-                    else if(mv_b == "mpo"){
-                        moveRef();
-                        // MOVE_MPO COPY
-                        SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO",0);
-                        move("MPO0", ft::VGRMOV_PTP);
-                        move("MPO", ft::VGRMOV_PTP);
-                        release();
-                        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                        axisY.moveRef();
-                        axisZ.moveRef();
-                    }
-                    else if(mv_b == "sld_white"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveSSD1();
-                        release();
-                        moveRef();
-                    }
-                    else if(mv_b == "sld_red"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveSSD2();
-                        release();
-                        moveRef();
-                    }
-                    else if(mv_b == "sld_blue"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveSSD3();
-                        release();
-                        moveRef();
-                    }
-                    else if(mv_b == "dsi"){
-                        // Decide what color to pick up
-                        moveRef();
-                        move("DIN0", ft::VGRMOV_PTP);
-                        move("DIN", ft::VGRMOV_PTP);
-                        release();
-                    }
-                    else if(mv_b == "dso"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveDeliveryOutAndRelease();
-                    }
-                    else if(mv_b == "nfc"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveNFC();
-                    }
-                    else if(mv_b == "color"){
-                        // Decide what color to pick up
-                        moveRef();
-                        moveColorSensor();
+                    // Only move
+                    else {
+                        // To start
+                        if (mv_b == "hbw") {
+                            moveRef();
+                            moveFromHBW1();
+                        } else if (mv_b == "mpo") {
+                            moveRef();
+                            // MOVE_MPO COPY
+                            SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO", 0);
+                            move("MPO0", ft::VGRMOV_PTP);
+                            move("MPO", ft::VGRMOV_PTP);
+                        } else if (mv_b == "sld_white") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD1();
+                        } else if (mv_b == "sld_red") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD2();
+                        } else if (mv_b == "sld_blue") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveSSD3();
+                        } else if (mv_b == "dsi") {
+                            // Decide what color to pick up
+                            moveRef();
+                            move("DIN0", ft::VGRMOV_PTP);
+                            move("DIN", ft::VGRMOV_PTP);
+                        } else if (mv_b == "dso") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveDeliveryOutAndRelease();
+                        } else if (mv_b == "nfc") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveNFC();
+                        } else if (mv_b == "color") {
+                            // Decide what color to pick up
+                            moveRef();
+                            moveColorSensor();
+                        }
                     }
                     // To end
                     moveA_B = false;
+                    mv_a = "";
+                    mv_b = "";
                 }
                     // Custom Workflow, Marius Hammer
                 else if (customFlowOne) {
