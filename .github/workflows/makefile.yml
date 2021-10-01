@@ -15,8 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: configure
-      working-directory: ./ft
-      run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf
+      run: export TOOLCHAIN_BIN_PATH=./gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf
       
     - name: Install dependencies
       working-directory: ./ft
