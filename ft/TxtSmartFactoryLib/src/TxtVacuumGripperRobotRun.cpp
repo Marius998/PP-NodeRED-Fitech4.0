@@ -306,6 +306,12 @@ namespace ft {
                             moveColorSensor();
                         }
                     }
+                    if(mv_a = "grip"){
+                        grip();
+                    }
+                    else if(mv_a = "release"){
+                        release();
+                    }
                     // To end
                     moveA_B = false;
                     mv_a = "";
