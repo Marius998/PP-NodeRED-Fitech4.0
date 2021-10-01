@@ -16,7 +16,7 @@ jobs:
     
     - name: configure
       working-directory: ./ft
-      run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin
+      run: export TOOLCHAIN_BIN_PATH={{$GITHUB_WORKSPACE}}/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin
       
     - name: Install dependencies
       working-directory: ./ft
