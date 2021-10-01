@@ -10,20 +10,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./ft
-
+    
     steps:
     - uses: actions/checkout@v2
     
     - name: configure
+      working-directory: ./ft
       run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf
       
     - name: Install dependencies
+      working-directory: ./ft
       run: make
       
     - name: Run check
+      working-directory: ./t
       run: make check
       
     - name: Run distcheck
+      working-directory: ./ft
       run: make distcheck
