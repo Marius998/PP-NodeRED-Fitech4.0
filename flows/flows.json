@@ -87,7 +87,7 @@
     {
         "id": "0e590d4d6e50ed41",
         "type": "subflow",
-        "name": "gripper",
+        "name": "VGR",
         "info": "",
         "category": "",
         "in": [
@@ -578,7 +578,7 @@
         "z": "a82cfd30015312e7",
         "name": "",
         "env": [],
-        "x": 480,
+        "x": 470,
         "y": 400,
         "wires": []
     },
@@ -879,7 +879,7 @@
         "z": "a82cfd30015312e7",
         "name": "",
         "env": [],
-        "x": 1160,
+        "x": 1150,
         "y": 380,
         "wires": []
     },
@@ -951,6 +951,94 @@
                 "1193c1d0046fc5e1"
             ]
         ]
+    },
+    {
+        "id": "d6e582040ece46f1",
+        "type": "inject",
+        "z": "a82cfd30015312e7",
+        "name": "grip",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"grip\",\"to\":\"\"}",
+        "payloadType": "json",
+        "x": 890,
+        "y": 760,
+        "wires": [
+            [
+                "7760a17f308a83e2"
+            ]
+        ]
+    },
+    {
+        "id": "7760a17f308a83e2",
+        "type": "subflow:0e590d4d6e50ed41",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "env": [],
+        "x": 1170,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "f2b249094989a421",
+        "type": "inject",
+        "z": "a82cfd30015312e7",
+        "name": "release",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"grip\",\"to\":\"\"}",
+        "payloadType": "json",
+        "x": 890,
+        "y": 840,
+        "wires": [
+            [
+                "ca5777f52db94872"
+            ]
+        ]
+    },
+    {
+        "id": "ca5777f52db94872",
+        "type": "subflow:0e590d4d6e50ed41",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "env": [],
+        "x": 1170,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "89999578c1ad3502",
+        "type": "comment",
+        "z": "a82cfd30015312e7",
+        "name": "Trigger pumps of VGR",
+        "info": "",
+        "x": 920,
+        "y": 700,
+        "wires": []
     },
     {
         "id": "fa600c20.8a9c9",
