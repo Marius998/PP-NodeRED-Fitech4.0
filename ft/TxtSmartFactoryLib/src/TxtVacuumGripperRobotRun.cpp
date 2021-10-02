@@ -310,7 +310,7 @@ namespace ft {
                         grip();
                     }
                     else if(mv_a == "release"){
-                        release();
+                        vgripper.release();
                     }
                     // To end
                     moveA_B = false;
