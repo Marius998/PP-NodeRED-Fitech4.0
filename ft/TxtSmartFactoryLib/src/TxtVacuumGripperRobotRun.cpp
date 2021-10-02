@@ -263,7 +263,7 @@ namespace ft {
                             moveColorSensor();
                         }
                     }
-                    // Only move
+                        // Only move
                     else {
                         // To start
                         if (mv_b == "hbw") {
@@ -304,12 +304,14 @@ namespace ft {
                             // Decide what color to pick up
                             moveRef();
                             moveColorSensor();
+                        } else if (mv_b == "home") {
+                            // Decide what color to pick up
+                            moveRef();
                         }
                     }
-                    if(mv_a == "grip"){
+                    if (mv_a == "grip") {
                         grip();
-                    }
-                    else if(mv_a == "release"){
+                    } else if (mv_a == "release") {
                         vgripper.release();
                     }
                     // To end
