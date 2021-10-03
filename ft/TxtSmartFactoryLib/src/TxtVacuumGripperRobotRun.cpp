@@ -269,6 +269,7 @@ namespace ft {
                         if (mv_b == "hbw") {
                             moveRef();
                             moveFromHBW1();
+                            moveFromHBW2();
                         } else if (mv_b == "mpo") {
                             moveRef();
                             // MOVE_MPO COPY
