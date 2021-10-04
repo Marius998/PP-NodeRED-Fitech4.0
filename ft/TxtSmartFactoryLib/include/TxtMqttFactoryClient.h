@@ -57,7 +57,9 @@ typedef enum
     VGR_MPO_PRODUCE=7,
     VGR_SLD_START=8,
     VGR_SLD_CALIB=9,
-    VGR_READY=10,
+    VGR_READY_HBW=10,
+    VGR_READY_MPO=11,
+    VGR_READY_DSO=12,
 } TxtVgrDoCode_t;
 
 typedef enum

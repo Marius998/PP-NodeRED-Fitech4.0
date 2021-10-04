@@ -18,7 +18,7 @@
         ],
         "out": [
             {
-                "x": 1000,
+                "x": 1360,
                 "y": 240,
                 "wires": [
                     {
@@ -37,13 +37,13 @@
         "type": "function",
         "z": "66722343801337bb",
         "name": "",
-        "func": "if(msg.payload.code == 10 && global.get(\"running\") == true){\n    msg.payload.vgr_ready = true;\n    return msg\n}",
+        "func": "switch(msg.payload.code){\n    case 10: if(global.get(\"vgr_current\") == \"hbw\")return msg;break;\n    case 11: if(global.get(\"vgr_current\") == \"mpo\")return msg;break;\n    case 12: if(global.get(\"vgr_current\") == \"dso\")return msg;break;\n    \n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
+        "x": 1000,
         "y": 240,
         "wires": [
             [
@@ -84,8 +84,25 @@
         "randomUnits": "seconds",
         "drop": true,
         "allowrate": false,
-        "x": 860,
+        "x": 1220,
         "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d18c033afc618cd1",
+        "type": "function",
+        "z": "66722343801337bb",
+        "name": "",
+        "func": "switch(msg.payload.code){\n    case 10: if(global.get(\"vgr_current\") == \"hbw\")return msg;break;\n    case 11: if(global.get(\"vgr_current\") == \"mpo\")return msg;break;\n    case 12: if(global.get(\"vgr_current\") == \"dso\")return msg;break;\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1190,7 +1207,8 @@
         "y": 540,
         "wires": [
             [
-                "9e9fff282556c72c"
+                "9e9fff282556c72c",
+                "7aecf8b47e3dd089"
             ]
         ]
     },
@@ -1213,7 +1231,7 @@
         "type": "function",
         "z": "a82cfd30015312e7",
         "name": "",
-        "func": "msg.payload.from = \"none\";\nmsg.payload.to = \"hbw\";\nglobal.set(\"running\",false)\n\nreturn msg;",
+        "func": "if(msg.payload.code == 10){\n    \n\nmsg.payload.from = \"none\";\nmsg.payload.to = \"mpo\";\nglobal.set(\"vgr_current\",\"mpo\");\n\n\nreturn msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1236,7 +1254,10 @@
         "x": 2710,
         "y": 540,
         "wires": [
-            []
+            [
+                "867f158c03bc9d61",
+                "5a82e96e7026ea84"
+            ]
         ]
     },
     {
@@ -1258,7 +1279,7 @@
         "type": "function",
         "z": "a82cfd30015312e7",
         "name": "",
-        "func": "global.set(\"running\",true)\nreturn msg;",
+        "func": "global.set(\"vgr_current\",\"hbw\")\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1273,10 +1294,67 @@
         ]
     },
     {
-        "id": "47d385cca67f53cc",
+        "id": "b753a62810307afd",
+        "type": "comment",
+        "z": "a82cfd30015312e7",
+        "name": "VGR Chain - Demo. Last function needs to stop flow",
+        "info": "",
+        "x": 1710,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "867f158c03bc9d61",
+        "type": "function",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "func": "if(msg.payload.code == 11){\n    \n\nmsg.payload.from = \"none\";\nmsg.payload.to = \"dso\";\nglobal.set(\"vgr_current\",\"dso\");\n\n\nreturn msg;\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 640,
+        "wires": [
+            [
+                "7b6a224aa57bf693"
+            ]
+        ]
+    },
+    {
+        "id": "aab36532515b6f38",
+        "type": "subflow:66722343801337bb",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "env": [],
+        "x": 1910,
+        "y": 640,
+        "wires": [
+            [
+                "462aedc1d7a193f3"
+            ]
+        ]
+    },
+    {
+        "id": "7b6a224aa57bf693",
+        "type": "subflow:0e590d4d6e50ed41",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "env": [],
+        "x": 1730,
+        "y": 640,
+        "wires": [
+            [
+                "aab36532515b6f38"
+            ]
+        ]
+    },
+    {
+        "id": "f48f280e77bd37cc",
         "type": "inject",
         "z": "a82cfd30015312e7",
-        "name": "nfc",
+        "name": "hbw",
         "props": [
             {
                 "p": "topic",
@@ -1291,9 +1369,9 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"none\",\"to\":\"nfc\"}",
+        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"none\",\"to\":\"hbw\"}",
         "payloadType": "json",
-        "x": 1560,
+        "x": 1570,
         "y": 540,
         "wires": [
             [
@@ -1302,14 +1380,74 @@
         ]
     },
     {
-        "id": "b753a62810307afd",
-        "type": "comment",
+        "id": "c09305d7e09aab43",
+        "type": "debug",
         "z": "a82cfd30015312e7",
-        "name": "VGR Chain - Demo. Last function needs to stop flow",
-        "info": "",
-        "x": 1710,
+        "name": "Dritter",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2430,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "7aecf8b47e3dd089",
+        "type": "debug",
+        "z": "a82cfd30015312e7",
+        "name": "Erster",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2230,
         "y": 440,
         "wires": []
+    },
+    {
+        "id": "5a82e96e7026ea84",
+        "type": "debug",
+        "z": "a82cfd30015312e7",
+        "name": "Zweiter",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2860,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "462aedc1d7a193f3",
+        "type": "function",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "func": "if(msg.payload.code == 12){\n  return msg;\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2120,
+        "y": 640,
+        "wires": [
+            [
+                "c09305d7e09aab43"
+            ]
+        ]
     },
     {
         "id": "fa600c20.8a9c9",

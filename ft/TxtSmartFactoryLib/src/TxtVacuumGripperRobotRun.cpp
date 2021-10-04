@@ -271,12 +271,16 @@ namespace ft {
                             moveRef();
                             moveFromHBW1();
                             moveFromHBW2();
+                            // code = 10
+                            mqttclient->publishVGR_Do(VGR_READY_HBW,reqWP_MPO, TIMEOUT_MS_PUBLISH);
                         } else if (mv_b == "mpo") {
                             moveRef();
                             // MOVE_MPO COPY
                             SPDLOG_LOGGER_TRACE(spdlog::get("console"), "moveMPO", 0);
                             move("MPO0", ft::VGRMOV_PTP);
                             move("MPO", ft::VGRMOV_PTP);
+                            // code = 11
+                            mqttclient->publishVGR_Do(VGR_READY_MPO,reqWP_MPO, TIMEOUT_MS_PUBLISH);
                         } else if (mv_b == "sld_white") {
                             // Decide what color to pick up
                             moveRef();
@@ -298,6 +302,8 @@ namespace ft {
                             // Decide what color to pick up
                             moveRef();
                             moveDeliveryOutAndRelease();
+                            // code = 12
+                            mqttclient->publishVGR_Do(VGR_READY_DSO,reqWP_MPO, TIMEOUT_MS_PUBLISH);
                         } else if (mv_b == "nfc") {
                             // Decide what color to pick up
                             moveRef();
@@ -320,7 +326,6 @@ namespace ft {
                     moveA_B = false;
                     mv_a = "";
                     mv_b = "";
-                    mqttclient->publishVGR_Do(VGR_READY,reqWP_MPO, TIMEOUT_MS_PUBLISH);
                 }
                     // Custom Workflow, Marius Hammer
                 else if (customFlowOne) {
