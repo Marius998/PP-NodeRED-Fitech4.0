@@ -7,7 +7,22 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_quick:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Make Project
+        working-directory: ./ft
+        run: export TOOLCHAIN_BIN_PATH=./../gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabihf/bin && make bin/TxtFactoryVGR
+
+      - name: Show binaries
+        working-directory: ./ft/bin
+        run: ls
+        
+  build_complete:
 
     runs-on: ubuntu-latest
 
@@ -21,4 +36,3 @@ jobs:
       - name: Show binaries
         working-directory: ./ft/bin
         run: ls
-
