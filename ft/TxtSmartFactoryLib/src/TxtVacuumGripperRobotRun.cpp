@@ -265,6 +265,7 @@ namespace ft {
                     }
                         // Only move
                     else {
+                        assert(mqttclient);
                         // To start
                         if (mv_b == "hbw") {
                             moveRef();
@@ -319,6 +320,7 @@ namespace ft {
                     moveA_B = false;
                     mv_a = "";
                     mv_b = "";
+                    mqttclient->publishVGR_Do(VGR_READY,reqWP_MPO, TIMEOUT_MS_PUBLISH);
                 }
                     // Custom Workflow, Marius Hammer
                 else if (customFlowOne) {
