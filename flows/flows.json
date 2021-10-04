@@ -37,7 +37,7 @@
         "type": "function",
         "z": "66722343801337bb",
         "name": "",
-        "func": "if(msg.payload.code == 10){\n    msg.payload.vgr_ready = true;\n    return msg\n}",
+        "func": "if(msg.payload.code == 10 && global.get(\"running\") == true){\n    msg.payload.vgr_ready = true;\n    return msg\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1186,29 +1186,13 @@
         "z": "a82cfd30015312e7",
         "name": "",
         "env": [],
-        "x": 1810,
-        "y": 480,
+        "x": 2120,
+        "y": 540,
         "wires": [
             [
-                "50995bf5f599f45a"
+                "9e9fff282556c72c"
             ]
         ]
-    },
-    {
-        "id": "50995bf5f599f45a",
-        "type": "debug",
-        "z": "a82cfd30015312e7",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2070,
-        "y": 480,
-        "wires": []
     },
     {
         "id": "f4cf5e224ed16255",
@@ -1216,8 +1200,8 @@
         "z": "a82cfd30015312e7",
         "name": "",
         "env": [],
-        "x": 1630,
-        "y": 480,
+        "x": 1940,
+        "y": 540,
         "wires": [
             [
                 "acde742f0fbb7c14"
@@ -1225,28 +1209,63 @@
         ]
     },
     {
-        "id": "d9896ee67c860c91",
-        "type": "inject",
+        "id": "9e9fff282556c72c",
+        "type": "function",
         "z": "a82cfd30015312e7",
-        "name": "hbw",
-        "props": [
-            {
-                "p": "topic",
-                "vt": "str"
-            },
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"none\",\"to\":\"hbw\"}",
-        "payloadType": "json",
-        "x": 1450,
-        "y": 480,
+        "name": "",
+        "func": "msg.payload.from = \"none\";\nmsg.payload.to = \"hbw\";\nglobal.set(\"running\",false)\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2340,
+        "y": 540,
+        "wires": [
+            [
+                "132a87b4b45f3482"
+            ]
+        ]
+    },
+    {
+        "id": "531fc40546268a4e",
+        "type": "subflow:66722343801337bb",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "env": [],
+        "x": 2710,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "132a87b4b45f3482",
+        "type": "subflow:0e590d4d6e50ed41",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "env": [],
+        "x": 2530,
+        "y": 540,
+        "wires": [
+            [
+                "531fc40546268a4e"
+            ]
+        ]
+    },
+    {
+        "id": "08c42e8229c9d01d",
+        "type": "function",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "func": "global.set(\"running\",true)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 540,
         "wires": [
             [
                 "f4cf5e224ed16255"
@@ -1254,10 +1273,10 @@
         ]
     },
     {
-        "id": "b958c12286d17f1c",
+        "id": "47d385cca67f53cc",
         "type": "inject",
         "z": "a82cfd30015312e7",
-        "name": "sld_white",
+        "name": "nfc",
         "props": [
             {
                 "p": "topic",
@@ -1272,15 +1291,25 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"none\",\"to\":\"sld_white\"}",
+        "payload": "{\"type\":\"\",\"ts\":\"\",\"from\":\"none\",\"to\":\"nfc\"}",
         "payloadType": "json",
-        "x": 1440,
-        "y": 420,
+        "x": 1560,
+        "y": 540,
         "wires": [
             [
-                "f4cf5e224ed16255"
+                "08c42e8229c9d01d"
             ]
         ]
+    },
+    {
+        "id": "b753a62810307afd",
+        "type": "comment",
+        "z": "a82cfd30015312e7",
+        "name": "VGR Chain - Demo. Last function needs to stop flow",
+        "info": "",
+        "x": 1710,
+        "y": 440,
+        "wires": []
     },
     {
         "id": "fa600c20.8a9c9",
