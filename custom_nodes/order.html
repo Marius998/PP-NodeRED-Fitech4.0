@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    RED.nodes.registerType('order', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            quality: {value: ""},
+            color: {value: ""},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "fa-arrows-alt",
+        label: function () {
+            return this.name || "order";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="order">
+    <div class="form-row">
+        <label for="node-input-quality"><i class="fa fa-dot-circle-o"></i>Quality</label>
+        <select id="node-input-quality" name="quality">
+            <option value="nfc">Raw</option>
+            <option value="color">Processed</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-color"><i class="fa fa-sign-out"></i>Color</label>
+        <select id="node-input-color" name="color">
+            <option value="dso">White</option>
+            <option value="nfc">Red</option>
+            <option value="color">Blue</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="lower-case">
+    <p>Create MQTT Payload for ordering workpieces</p>
+</script>
