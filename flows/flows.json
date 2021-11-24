@@ -30,7 +30,7 @@
     {
         "id": "0e590d4d6e50ed41",
         "type": "subflow",
-        "name": "VGR",
+        "name": "MoveVacuumGrippe",
         "info": "",
         "category": "",
         "in": [
@@ -3757,7 +3757,8 @@
         "y": 160,
         "wires": [
             [
-                "deccd99332f4f096"
+                "deccd99332f4f096",
+                "023f4759b1d3a162"
             ]
         ]
     },
@@ -4966,6 +4967,36 @@
         "y": 160,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "c260535b9acee8df",
+        "type": "debug",
+        "z": "a82cfd30015312e7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "023f4759b1d3a162",
+        "type": "order",
+        "z": "a82cfd30015312e7",
+        "quality": "PROCESSED",
+        "color": "RED",
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "c260535b9acee8df"
+            ]
         ]
     }
 ]
