@@ -10,7 +10,8 @@
   "license": "ISC",
   "node-red" : {
     "nodes": {
-      "from-to": "from-to.js"
+      "from-to": "from-to.js",
+      "order": "order.js"
     }
   }
 }
