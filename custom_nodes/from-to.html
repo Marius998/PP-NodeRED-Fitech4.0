@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    RED.nodes.registerType('from-to', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            from: {value: ""},
+            to: {value: ""},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.png",
+        label: function () {
+            return this.name || "from-to";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="from-to">
+    <div class="form-row">
+        <label for="node-input-from"><i class="fa fa-dot-circle-o"></i>From</label>
+        <select id="node-input-from" name="from">
+            <option value="hbw">High-Bay Warehouse</option>
+            <option value="mpo">Multi-Processing Station with Oven</option>
+            <option value="sld_white">Sorting Line White</option>
+            <option value="sld_red">Sorting Line Red</option>
+            <option value="sld_blue">Sorting Line Blue</option>
+            <option value="dsi">Pickup Station</option>
+            <option value="dso">Delivery Station</option>
+            <option value="nfc">NFC Reader</option>
+            <option value="color">Color Reader</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-to"><i class="fa fa-sign-out"></i>To</label>
+        <select id="node-input-to" name="to">
+            <option value="hbw">High-Bay Warehouse</option>
+            <option value="mpo">Multi-Processing Station with Oven</option>
+            <option value="sld_white">Sorting Line White</option>
+            <option value="sld_red">Sorting Line Red</option>
+            <option value="sld_blue">Sorting Line Blue</option>
+            <option value="dsi">Pickup Station</option>
+            <option value="dso">Delivery Station</option>
+            <option value="nfc">NFC Reader</option>
+            <option value="color">Color Reader</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="lower-case">
+    <p>Create MQTT Payload for moving workpiece from one place to another </p>
+</script>
