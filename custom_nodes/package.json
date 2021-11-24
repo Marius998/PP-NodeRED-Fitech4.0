@@ -1,0 +1,11 @@
+{
+  "name": "node-red-custom-mqtt-ftinterface",
+  "version": "1.0.0",
+  "description": "Custom MQTT interface for Fischert. Modelfabrik 4.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
