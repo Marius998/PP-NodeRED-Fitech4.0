@@ -3,8 +3,6 @@ module.exports = function(RED) {
     function Hbw(config) {
         RED.nodes.createNode(this,config);
         var node = this;
-        var quality = config.quality;
-        var color = config.color;
         node.on('input', function(msg) {
             msg.payload = {
                 "workpiece": {
