@@ -10,7 +10,10 @@
         outputs: 1,
         icon: "fa-arrows-alt",
         label: function () {
-            return this.name || "order";
+            if(this.quality && this.color){
+                return (this.quality + " : " + this.color)
+            }
+            return "order"
         }
     });
 </script>
