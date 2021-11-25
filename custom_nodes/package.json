@@ -8,10 +8,11 @@
   },
   "author": "",
   "license": "ISC",
-  "node-red" : {
+  "node-red": {
     "nodes": {
       "from-to": "from-to.js",
-      "order": "order.js"
+      "order": "order.js",
+      "hbw": "hbw.js"
     }
   }
 }

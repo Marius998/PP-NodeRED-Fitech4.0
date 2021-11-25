@@ -28,6 +28,13 @@
         "info": ""
     },
     {
+        "id": "9f64619ca4299970",
+        "type": "tab",
+        "label": "Custom Nodes",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "0e590d4d6e50ed41",
         "type": "subflow",
         "name": "MoveVacuumGrippe",
@@ -4997,6 +5004,224 @@
             [
                 "c260535b9acee8df"
             ]
+        ]
+    },
+    {
+        "id": "65a52a9d71b46f36",
+        "type": "from-to",
+        "z": "9f64619ca4299970",
+        "from": "mpo",
+        "to": "sld_blue",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "397587cd77b2ca99"
+            ]
+        ]
+    },
+    {
+        "id": "397587cd77b2ca99",
+        "type": "subflow:0e590d4d6e50ed41",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "97a99306ba5c1fbf"
+            ]
+        ]
+    },
+    {
+        "id": "87436fa1b98e59af",
+        "type": "inject",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "65a52a9d71b46f36"
+            ]
+        ]
+    },
+    {
+        "id": "97a99306ba5c1fbf",
+        "type": "subflow:82cba32c8a93ed06",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "x": 850,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "59f6933a7f3a7e48",
+        "type": "order",
+        "z": "9f64619ca4299970",
+        "quality": "PROCESSED",
+        "color": "WHITE",
+        "x": 350,
+        "y": 280,
+        "wires": [
+            [
+                "406a80c75c336d94"
+            ]
+        ]
+    },
+    {
+        "id": "406a80c75c336d94",
+        "type": "mqtt out",
+        "z": "9f64619ca4299970",
+        "name": "Make HBW Move",
+        "topic": "fl/vgr/do",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fa600c20.8a9c9",
+        "x": 630,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2d80920474c41c64",
+        "type": "hbw",
+        "z": "9f64619ca4299970",
+        "events": "",
+        "color": "",
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "1393d9430de4a2f8"
+            ]
+        ]
+    },
+    {
+        "id": "1eee2bb376719ec7",
+        "type": "inject",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "59f6933a7f3a7e48"
+            ]
+        ]
+    },
+    {
+        "id": "7f60d5e3989db075",
+        "type": "inject",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "2d80920474c41c64"
+            ]
+        ]
+    },
+    {
+        "id": "1393d9430de4a2f8",
+        "type": "debug",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e8f5328f3fd7164e",
+        "type": "hbw",
+        "z": "9f64619ca4299970",
+        "events": "",
+        "color": "",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "5d1b98278555a19b"
+            ]
+        ]
+    },
+    {
+        "id": "5d1b98278555a19b",
+        "type": "function",
+        "z": "9f64619ca4299970",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 460,
+        "wires": [
+            []
         ]
     }
 ]
