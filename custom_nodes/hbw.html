@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    RED.nodes.registerType('hbw', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            events: {value: ""},
+            color: {value: ""},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "fa-arrows-alt",
+        label: function () {
+            return "High Bay Warehouse"
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="hbw">
+    <div class="form-row">
+        <label for="node-input-events"><i class="fa fa-dot-circle-o"></i>Events</label>
+        <select id="node-input-events" name="events">
+            <option value="RAW">Fetched</option>
+            <option value="PROCESSED">Stored</option>
+            <option value="PROCESSED">None</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-info"><i class="fa fa-sign-out"></i>Info</label>
+        <select id="node-input-info" name="info">
+            <option value="WHITE">Stored workpieces</option>
+            <option value="RED">Raw workpieces</option>
+            <option value="BLUE">Processed workpieces</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="lower-case">
+    <p>Create MQTT Payload for hbwing workpieces</p>
+</script>
