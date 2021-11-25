@@ -1,4 +1,4 @@
-# Welche Vor- und Nachteile bietet (eine) / (die Fischertechnik Modelfabrik) in Kombination mit einer visuellen Programmiersprache bei dem Erstellen und Optimieren von Arbeitsabläufen ? 
+# Welche Vor- und Nachteile bietet (eine) / (die Fischertechnik Modelfabrik) in Kombination mit einer flow-basierten (visuellen) Programmiersprache bei dem Erstellen und Optimieren von Arbeitsabläufen ? 
 ## Modelfabrik
 - Aufbau und Stationen
 - Controller und Code
