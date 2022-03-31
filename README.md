@@ -29,9 +29,13 @@ Double click LocalBroker and set fields ( Server is IP of the Vacuum-Gripper Con
 
 ## Setup Factory  
 Power the factory
+
 Start all controllers
+
 Make sure time and date is synched on all controllers
+
 Begin by starting the Vacuum-Gripper program
+
 Start all other controllers programs
 
 
