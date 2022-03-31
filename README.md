@@ -22,3 +22,17 @@ Start application with `node-red`
 
 Import flows from PP-NodeRED-Fitech4.0/flows/flows.js ( Inside Node-RED -> Menu in top right corner -> Import )
 
+Navigate to the configuration nodes ( Inside Node-RED -> Settings Icon in top right corner )
+
+Double click LocalBroker and set fields ( Server is IP of the Vacuum-Gripper Controller, Port should be 1883 )
+
+
+## Setup Factory  
+Power the factory
+Start all controllers
+Make sure time and date is synched on all controllers
+Begin by starting the Vacuum-Gripper program
+Start all other controllers programs
+
+
+
